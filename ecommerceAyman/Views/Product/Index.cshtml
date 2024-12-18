@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ecommerceAyman.Models.Product>
+
+<h2>Products for you</h2>
+@if (ViewBag.UserName != null)
+{
+    <p>Hello, @ViewBag.UserName!</p>
+}
+else
+{
+    <p>Hello, unknown visitor</p>
+}
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <!-- Product Image -->
+                <img class="card-img-top" src="@product.ImageUrl" alt="@product.Name" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <!-- Product Title -->
+                    <h5 class="card-title">@product.Name</h5>
+                    <!-- Product Description -->
+                    <p class="card-text">@product.Description</p>
+                    <!-- Product Price -->
+                    <p class="card-text text-success">$@product.Price</p>
+                    <!-- Add to Cart Form -->
+                    <form asp-action="AddToCart" method="post">
+                        <input type="hidden" name="productId" value="@product.ProductID" />
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Show Cart Button -->
+<a href="@Url.Action("ShowCart", "Product")" class="btn btn-primary">Show My Cart</a>

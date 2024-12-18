@@ -1,0 +1,32 @@
+﻿@model ecommerceAyman.Models.ReceiptViewModel
+
+<h2>Receipt</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CartItems)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Product.Description</td>
+                <td>@item.Quantity</td>
+                <td>@item.Product.Price.ToString("C")</td>
+                <td>@(item.Quantity * item.Product.Price)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Total: @Model.TotalAmount.ToString("C")</h3>
+
+<!-- Button to print the receipt -->
+<button onclick="window.print()" class="btn btn-primary">Print Receipt</button>
